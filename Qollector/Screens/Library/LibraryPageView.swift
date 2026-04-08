@@ -5,21 +5,32 @@ struct LibraryPageView: View {
     @Environment(\.appThemePalette) private var palette
     @Environment(\.appFontPreset) private var fontPreset
     @Query(sort: \RecordItem.updatedAt, order: .reverse) private var records: [RecordItem]
+    @Query(sort: \Library.createdAt) private var libraries: [Library]
+    @Query private var profiles: [LibraryRecordProfile]
     @Query private var settings: [AppSettings]
+    @Binding var selectedLibraryID: PersistentIdentifier?
     let onSelectRecord: (RecordItem) -> Void
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: AppTheme.sectionSpacing) {
-                if records.isEmpty {
+                if !libraries.isEmpty {
+                    LibraryPickerBar(libraries: libraries, selectedLibraryID: $selectedLibraryID)
+                }
+
+                if filteredRecords.isEmpty {
                     emptyState
                 } else {
                     LazyVStack(spacing: 14) {
-                        ForEach(records) { record in
+                        ForEach(filteredRecords) { record in
                             Button {
                                 onSelectRecord(record)
                             } label: {
-                                RecordCardView(record: record, ratingStyle: currentRatingStyle)
+                                RecordCardView(
+                                    record: record,
+                                    profile: profileMap[record.persistentModelID],
+                                    ratingStyle: currentRatingStyle
+                                )
                             }
                             .buttonStyle(.plain)
                         }
@@ -30,6 +41,11 @@ struct LibraryPageView: View {
         }
         .background(palette.background)
         .accessibilityIdentifier("page.library")
+        .task {
+            if selectedLibraryID == nil {
+                selectedLibraryID = libraries.first?.persistentModelID
+            }
+        }
     }
 
     private var emptyState: some View {
@@ -42,5 +58,20 @@ struct LibraryPageView: View {
 
     private var currentRatingStyle: RatingStyle {
         settings.first?.preferredRatingStyle ?? .stars
+    }
+
+    private var profileMap: [PersistentIdentifier: LibraryRecordProfile] {
+        LibraryStore.profileMap(from: profiles)
+    }
+
+    private var filteredRecords: [RecordItem] {
+        guard let selectedLibraryID else { return records }
+        let allowed = Set(
+            profiles
+                .filter { $0.library.persistentModelID == selectedLibraryID }
+                .map { $0.record.persistentModelID }
+        )
+
+        return records.filter { allowed.contains($0.persistentModelID) }
     }
 }

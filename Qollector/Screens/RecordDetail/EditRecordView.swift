@@ -5,30 +5,41 @@ struct EditRecordView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @Query private var settings: [AppSettings]
+    @Query private var profiles: [LibraryRecordProfile]
     @State private var draft: RecordDraft
     let record: RecordItem
 
     init(record: RecordItem) {
         self.record = record
-        _draft = State(initialValue: RecordDraft(record: record))
+        _draft = State(initialValue: RecordDraft(record: record, library: nil, profile: nil))
     }
 
     var body: some View {
         NavigationStack {
-            RecordFormView(
-                title: "",
-                saveButtonTitle: "Save",
-                ratingStyle: settings.first?.preferredRatingStyle ?? .stars,
-                draft: $draft
-            ) {
-                RecordEditor.update(record: record, from: draft, in: modelContext)
-                dismiss()
-            }
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button("Close") { dismiss() }
+            if let library = activeProfile?.library {
+                RecordFormView(
+                    library: library,
+                    title: "",
+                    saveButtonTitle: "Save",
+                    ratingStyle: settings.first?.preferredRatingStyle ?? .stars,
+                    draft: $draft
+                ) {
+                    RecordEditor.update(record: record, from: draft, in: modelContext)
+                    dismiss()
+                }
+                .task(id: record.persistentModelID) {
+                    draft = RecordDraft(record: record, library: library, profile: activeProfile)
+                }
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button("Close") { dismiss() }
+                    }
                 }
             }
         }
+    }
+
+    private var activeProfile: LibraryRecordProfile? {
+        profiles.first(where: { $0.record.persistentModelID == record.persistentModelID })
     }
 }

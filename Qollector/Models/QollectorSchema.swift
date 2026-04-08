@@ -6,7 +6,7 @@ enum QollectorSchemaV1: VersionedSchema {
     static let models: [any PersistentModel.Type] = [
         RecordItem.self,
         Tag.self,
-        AppSettings.self,
+        QollectorSchemaV1.AppSettings.self,
     ]
 
     @Model
@@ -35,7 +35,7 @@ enum QollectorSchemaV2: VersionedSchema {
     static let models: [any PersistentModel.Type] = [
         RecordItem.self,
         Tag.self,
-        AppSettings.self,
+        QollectorSchemaV2.AppSettings.self,
     ]
 
     @Model
@@ -70,7 +70,7 @@ enum QollectorSchemaV3: VersionedSchema {
     static let models: [any PersistentModel.Type] = [
         RecordItem.self,
         Tag.self,
-        AppSettings.self,
+        QollectorSchemaV3.AppSettings.self,
     ]
 
     @Model
@@ -97,11 +97,50 @@ enum QollectorSchemaV3: VersionedSchema {
     }
 }
 
+enum QollectorSchemaV4: VersionedSchema {
+    static let versionIdentifier = Schema.Version(4, 0, 0)
+    static let models: [any PersistentModel.Type] = [
+        RecordItem.self,
+        Tag.self,
+        Library.self,
+        LibraryRecordProfile.self,
+        QollectorSchemaV4.AppSettings.self,
+    ]
+
+    @Model
+    final class AppSettings {
+        var preferredRatingStyleRawValue: String
+        var fontPresetRawValue: String
+        var backgroundColorRawValue: String
+        var uiColorRawValue: String
+        var didSeedSampleLibrary: Bool
+        // Explicit V4-only field to ensure a distinct schema checksum for this version.
+        var schemaRevisionMarker: Int
+
+        init(
+            preferredRatingStyleRawValue: String = RatingStyle.stars.rawValue,
+            fontPresetRawValue: String = AppFontPreset.rounded.rawValue,
+            backgroundColorRawValue: String = AppColorPreset.paper.rawValue,
+            uiColorRawValue: String = AppColorPreset.rose.rawValue,
+            didSeedSampleLibrary: Bool = false,
+            schemaRevisionMarker: Int = 4
+        ) {
+            self.preferredRatingStyleRawValue = preferredRatingStyleRawValue
+            self.fontPresetRawValue = fontPresetRawValue
+            self.backgroundColorRawValue = backgroundColorRawValue
+            self.uiColorRawValue = uiColorRawValue
+            self.didSeedSampleLibrary = didSeedSampleLibrary
+            self.schemaRevisionMarker = schemaRevisionMarker
+        }
+    }
+}
+
 enum QollectorMigrationPlan: SchemaMigrationPlan {
     static let schemas: [any VersionedSchema.Type] = [
         QollectorSchemaV1.self,
         QollectorSchemaV2.self,
         QollectorSchemaV3.self,
+        QollectorSchemaV4.self,
     ]
 
     static let stages: [MigrationStage] = [
@@ -114,6 +153,10 @@ enum QollectorMigrationPlan: SchemaMigrationPlan {
         .lightweight(
             fromVersion: QollectorSchemaV2.self,
             toVersion: QollectorSchemaV3.self
+        ),
+        .lightweight(
+            fromVersion: QollectorSchemaV3.self,
+            toVersion: QollectorSchemaV4.self
         ),
     ]
 

@@ -12,18 +12,19 @@ struct RootPagerView: View {
     @Query private var settings: [AppSettings]
     @State private var selectedPage: RootPage = .library
     @State private var selectedRecord: RecordItem?
+    @State private var selectedLibraryID: PersistentIdentifier?
 
     var body: some View {
         NavigationStack {
             ZStack {
                 TabView(selection: $selectedPage) {
-                    SearchPageView(onSelectRecord: openRecord)
+                    SearchPageView(selectedLibraryID: $selectedLibraryID, onSelectRecord: openRecord)
                         .tag(RootPage.search)
 
-                    LibraryPageView(onSelectRecord: openRecord)
+                    LibraryPageView(selectedLibraryID: $selectedLibraryID, onSelectRecord: openRecord)
                         .tag(RootPage.library)
 
-                    AddRecordPageView {
+                    AddRecordPageView(selectedLibraryID: $selectedLibraryID) {
                         selectedPage = .library
                     }
                     .tag(RootPage.add)

@@ -3,7 +3,7 @@ import SwiftData
 @MainActor
 enum PreviewContainer {
     static let shared: ModelContainer = {
-        let schema = Schema(versionedSchema: QollectorSchemaV3.self)
+        let schema = Schema(versionedSchema: QollectorSchemaV4.self)
 
         let configuration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
         let container = try! ModelContainer(

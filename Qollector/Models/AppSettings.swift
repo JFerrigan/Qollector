@@ -1,9 +1,9 @@
 import Foundation
 import SwiftData
 
-typealias AppSettings = QollectorSchemaV3.AppSettings
+typealias AppSettings = QollectorSchemaV4.AppSettings
 
-extension QollectorSchemaV3.AppSettings {
+extension QollectorSchemaV4.AppSettings {
     convenience init(
         preferredRatingStyle: RatingStyle = .stars,
         fontPreset: AppFontPreset = .rounded,

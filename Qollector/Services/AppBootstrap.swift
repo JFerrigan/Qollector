@@ -3,9 +3,11 @@ import SwiftData
 enum AppBootstrap {
     static func bootstrap(in modelContext: ModelContext) {
         let settings = fetchOrCreateSettings(in: modelContext)
+        _ = LibraryStore.fetchOrCreateDefaultVinylLibrary(in: modelContext)
+        let existingRecords = (try? modelContext.fetch(FetchDescriptor<RecordItem>())) ?? []
+        LibraryStore.ensureProfilesExist(for: existingRecords, in: modelContext)
 
         guard !settings.didSeedSampleLibrary else { return }
-        let existingRecords = (try? modelContext.fetch(FetchDescriptor<RecordItem>())) ?? []
         guard existingRecords.isEmpty else {
             settings.didSeedSampleLibrary = true
             try? modelContext.save()
