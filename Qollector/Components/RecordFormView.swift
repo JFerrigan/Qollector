@@ -27,14 +27,14 @@ struct RecordFormView: View {
                 notesSection
 
                 Button(action: onSave) {
-                        Text(saveButtonTitle)
+                    Text(saveButtonTitle)
                         .font(fontPreset.textStyle(.headline, weight: .semibold))
-                        .foregroundStyle(Color.white)
+                        .foregroundStyle(palette.accentContent)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 16)
                         .background(
                             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .fill(palette.textPrimary)
+                                .fill(palette.accentFill)
                         )
                 }
                 .buttonStyle(.plain)
@@ -133,7 +133,7 @@ struct RecordFormView: View {
                 .textInputAutocapitalization(.words)
                 .padding(14)
                 .background(
-                        RoundedRectangle(cornerRadius: AppTheme.innerRadius, style: .continuous)
+                    RoundedRectangle(cornerRadius: AppTheme.innerRadius, style: .continuous)
                         .fill(palette.secondaryBackground)
                 )
         }

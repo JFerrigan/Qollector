@@ -62,7 +62,7 @@ struct RootPagerView: View {
     }
 
     private var palette: AppThemePalette {
-        AppTheme.palette(for: activeSettings?.backgroundPreset ?? .paper)
+        AppTheme.palette(for: activeSettings?.backgroundPreset ?? .rose)
     }
 
     private var fontPreset: AppFontPreset {

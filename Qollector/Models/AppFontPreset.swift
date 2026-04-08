@@ -35,7 +35,7 @@ enum AppFontPreset: String, CaseIterable, Codable, Identifiable {
         case .mono:
             return .system(size: size, weight: weight, design: .monospaced)
         case .condensed:
-            return .system(size: size, weight: weight, width: .condensed)
+            return .system(size: size * 0.94, weight: weight, design: .default)
         }
     }
 
@@ -60,4 +60,3 @@ enum AppFontPreset: String, CaseIterable, Codable, Identifiable {
         }
     }
 }
-

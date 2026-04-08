@@ -35,12 +35,12 @@ struct RatingControl: View {
                         } label: {
                             Text("\(value)")
                                 .font(fontPreset.textStyle(.subheadline, weight: .semibold))
-                                .foregroundStyle(value == ratingValue ? Color.white : palette.textPrimary)
+                                .foregroundStyle(value == ratingValue ? palette.accentContent : palette.textPrimary)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 10)
                                 .background(
                                     RoundedRectangle(cornerRadius: 14, style: .continuous)
-                                        .fill(value == ratingValue ? palette.textPrimary : palette.secondaryBackground)
+                                        .fill(value == ratingValue ? palette.accentFill : palette.secondaryBackground)
                                 )
                         }
                         .buttonStyle(.plain)

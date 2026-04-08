@@ -1,4 +1,4 @@
-# VinylCollector Architecture
+# Qollector Architecture
 
 ## App Shape
 - SwiftUI app using SwiftData for local persistence.
@@ -10,6 +10,12 @@
 - `Tag`: reusable tag entity keyed by normalized name.
 - `AppSettings`: singleton-style local settings entity holding rating mode, font preset, background preset, and seed flags.
 - `RecordIconRecipe`: codable value type stored on the record entity as token/raw-value fields.
+
+## Future Domain Expansion
+- Keep the current implementation vinyl-specific, but avoid hard-coding UI assumptions that would block a future collectible mode switch.
+- Future versions may introduce a higher-level collection type such as `vinyl`, `books`, or other collectible categories.
+- Shared behaviors should remain reusable across modes: library browsing, search, tags, notes, ratings, and themed icon generation.
+- Mode-specific metadata should be layered on top later rather than forcing v1 to generalize prematurely.
 
 ## Theme Preferences
 - Add a font preset enum with 5 supported app-wide options.

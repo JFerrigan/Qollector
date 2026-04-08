@@ -1,6 +1,6 @@
 //
-//  VinylCollectorApp.swift
-//  VinylCollector
+//  QollectorApp.swift
+//  Qollector
 //
 //  Created by Jake Ferrigan on 4/7/26.
 //
@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 @main
-struct VinylCollectorApp: App {
+struct QollectorApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             RecordItem.self,

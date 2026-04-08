@@ -1,4 +1,4 @@
-# VinylCollector UI System
+# Qollector UI System
 
 ## Visual Direction
 - Flat, modern, pastel-first palette.

@@ -1,4 +1,4 @@
-# VinylCollector Implementation Phases
+# Qollector Implementation Phases
 
 ## Phase 1: Foundation Shell
 - Establish docs, theme tokens, root pager, settings model, and sample data bootstrap.
@@ -21,3 +21,8 @@
 ## Phase 5: Online Catalog
 - Implement a real `CatalogProvider` backed by a public music database API.
 - Add remote search or metadata lookup without changing the existing local model flow.
+
+## Phase 6: Expandable Collection Modes
+- Add a top-level collection mode model so the app can support vinyl, books, or other collectible categories.
+- Separate shared collection behaviors from category-specific metadata and presentation.
+- Revisit naming and data structures only after the vinyl flow is stable and complete.

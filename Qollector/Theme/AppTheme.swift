@@ -10,6 +10,8 @@ struct AppThemePalette {
     let line: Color
     let textPrimary: Color
     let textSecondary: Color
+    let accentFill: Color
+    let accentContent: Color
 }
 
 enum AppTheme {
@@ -23,7 +25,9 @@ enum AppTheme {
             surfaceButter: Color(red: 0.99, green: 0.95, blue: 0.82),
             line: Color(red: 0.87, green: 0.80, blue: 0.78),
             textPrimary: Color(red: 0.17, green: 0.18, blue: 0.22),
-            textSecondary: Color(red: 0.40, green: 0.41, blue: 0.49)
+            textSecondary: Color(red: 0.40, green: 0.41, blue: 0.49),
+            accentFill: Color(red: 0.41, green: 0.34, blue: 0.42),
+            accentContent: Color(red: 0.95, green: 0.88, blue: 0.92)
         )
     }
 
@@ -34,7 +38,7 @@ enum AppTheme {
 }
 
 private struct AppThemePaletteKey: EnvironmentKey {
-    static let defaultValue = AppTheme.palette(for: .paper)
+    static let defaultValue = AppTheme.palette(for: .rose)
 }
 
 private struct AppFontPresetKey: EnvironmentKey {

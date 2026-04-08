@@ -1,14 +1,14 @@
 //
-//  VinylCollectorTests.swift
-//  VinylCollectorTests
+//  QollectorTests.swift
+//  QollectorTests
 //
 //  Created by Jake Ferrigan on 4/7/26.
 //
 
 import Testing
-@testable import VinylCollector
+@testable import Qollector
 
-struct VinylCollectorTests {
+struct QollectorTests {
 
     @Test func iconRecipeFactoryIsCaseInsensitive() async throws {
         let first = RecordIconRecipeFactory.makeRecipe(title: "Discovery", artist: "Daft Punk")

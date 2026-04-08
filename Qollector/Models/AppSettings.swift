@@ -10,7 +10,7 @@ final class AppSettings {
 
     init(
         preferredRatingStyle: RatingStyle = .stars,
-        backgroundPreset: AppBackgroundPreset = .paper,
+        backgroundPreset: AppBackgroundPreset = .rose,
         fontPreset: AppFontPreset = .rounded,
         didSeedSampleLibrary: Bool = false
     ) {
@@ -26,7 +26,7 @@ final class AppSettings {
     }
 
     var backgroundPreset: AppBackgroundPreset {
-        get { AppBackgroundPreset(rawValue: backgroundPresetRawValue) ?? .paper }
+        get { AppBackgroundPreset(rawValue: backgroundPresetRawValue) ?? .rose }
         set { backgroundPresetRawValue = newValue.rawValue }
     }
 

@@ -1,13 +1,13 @@
 //
-//  VinylCollectorUITestsLaunchTests.swift
-//  VinylCollectorUITests
+//  QollectorUITestsLaunchTests.swift
+//  QollectorUITests
 //
 //  Created by Jake Ferrigan on 4/7/26.
 //
 
 import XCTest
 
-final class VinylCollectorUITestsLaunchTests: XCTestCase {
+final class QollectorUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

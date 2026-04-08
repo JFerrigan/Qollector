@@ -1,7 +1,7 @@
-# VinylCollector Product Spec
+# Qollector Product Spec
 
 ## Product Summary
-VinylCollector is an iPhone-first record collection app with a calm pastel visual style and a collectible feel. The first release is offline-first and designed around a personal library experience: users browse owned records, add entries manually, search locally, tag records, rate them, write notes, and personalize the record icon using preset visual patterns.
+Qollector is an iPhone-first record collection app with a calm pastel visual style and a collectible feel. The first release is offline-first and designed around a personal library experience: users browse owned records, add entries manually, search locally, tag records, rate them, write notes, and personalize the record icon using preset visual patterns.
 
 ## Core Experience
 - Launch into the library as the center page of a horizontal pager.
@@ -27,6 +27,8 @@ VinylCollector is an iPhone-first record collection app with a calm pastel visua
 - Import flows and sync.
 - Accounts, cloud backup, and multi-device sync.
 - Barcode scanning, cover art lookup, or marketplace integrations.
+- Expand from vinyl-only into selectable collection modes such as books, vinyl, or other collectible categories.
+- Allow mode-specific metadata and icon treatments while preserving one shared collection shell.
 
 ## Success Criteria For Foundation
 - The app feels like a finished shell instead of a template.

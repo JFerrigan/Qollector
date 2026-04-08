@@ -12,37 +12,37 @@
 			containerPortal = F93AC5B62F8606C80050F7C0 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = F93AC5BD2F8606C80050F7C0;
-			remoteInfo = VinylCollector;
+			remoteInfo = Qollector;
 		};
 		F93AC5D92F8606C90050F7C0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F93AC5B62F8606C80050F7C0 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = F93AC5BD2F8606C80050F7C0;
-			remoteInfo = VinylCollector;
+			remoteInfo = Qollector;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F93AC5BE2F8606C80050F7C0 /* VinylCollector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VinylCollector.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F93AC5CE2F8606C90050F7C0 /* VinylCollectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VinylCollectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F93AC5D82F8606C90050F7C0 /* VinylCollectorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VinylCollectorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F93AC5BE2F8606C80050F7C0 /* Qollector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Qollector.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F93AC5CE2F8606C90050F7C0 /* QollectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QollectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F93AC5D82F8606C90050F7C0 /* QollectorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QollectorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		F93AC5C02F8606C80050F7C0 /* VinylCollector */ = {
+		F93AC5C02F8606C80050F7C0 /* Qollector */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = VinylCollector;
+			path = Qollector;
 			sourceTree = "<group>";
 		};
-		F93AC5D12F8606C90050F7C0 /* VinylCollectorTests */ = {
+		F93AC5D12F8606C90050F7C0 /* QollectorTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = VinylCollectorTests;
+			path = QollectorTests;
 			sourceTree = "<group>";
 		};
-		F93AC5DB2F8606C90050F7C0 /* VinylCollectorUITests */ = {
+		F93AC5DB2F8606C90050F7C0 /* QollectorUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = VinylCollectorUITests;
+			path = QollectorUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,9 +75,9 @@
 		F93AC5B52F8606C80050F7C0 = {
 			isa = PBXGroup;
 			children = (
-				F93AC5C02F8606C80050F7C0 /* VinylCollector */,
-				F93AC5D12F8606C90050F7C0 /* VinylCollectorTests */,
-				F93AC5DB2F8606C90050F7C0 /* VinylCollectorUITests */,
+				F93AC5C02F8606C80050F7C0 /* Qollector */,
+				F93AC5D12F8606C90050F7C0 /* QollectorTests */,
+				F93AC5DB2F8606C90050F7C0 /* QollectorUITests */,
 				F93AC5BF2F8606C80050F7C0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,9 +85,9 @@
 		F93AC5BF2F8606C80050F7C0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F93AC5BE2F8606C80050F7C0 /* VinylCollector.app */,
-				F93AC5CE2F8606C90050F7C0 /* VinylCollectorTests.xctest */,
-				F93AC5D82F8606C90050F7C0 /* VinylCollectorUITests.xctest */,
+				F93AC5BE2F8606C80050F7C0 /* Qollector.app */,
+				F93AC5CE2F8606C90050F7C0 /* QollectorTests.xctest */,
+				F93AC5D82F8606C90050F7C0 /* QollectorUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,9 +95,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F93AC5BD2F8606C80050F7C0 /* VinylCollector */ = {
+		F93AC5BD2F8606C80050F7C0 /* Qollector */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F93AC5E22F8606C90050F7C0 /* Build configuration list for PBXNativeTarget "VinylCollector" */;
+			buildConfigurationList = F93AC5E22F8606C90050F7C0 /* Build configuration list for PBXNativeTarget "Qollector" */;
 			buildPhases = (
 				F93AC5BA2F8606C80050F7C0 /* Sources */,
 				F93AC5BB2F8606C80050F7C0 /* Frameworks */,
@@ -108,18 +108,18 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				F93AC5C02F8606C80050F7C0 /* VinylCollector */,
+				F93AC5C02F8606C80050F7C0 /* Qollector */,
 			);
-			name = VinylCollector;
+			name = Qollector;
 			packageProductDependencies = (
 			);
-			productName = VinylCollector;
-			productReference = F93AC5BE2F8606C80050F7C0 /* VinylCollector.app */;
+			productName = Qollector;
+			productReference = F93AC5BE2F8606C80050F7C0 /* Qollector.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F93AC5CD2F8606C90050F7C0 /* VinylCollectorTests */ = {
+		F93AC5CD2F8606C90050F7C0 /* QollectorTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F93AC5E52F8606C90050F7C0 /* Build configuration list for PBXNativeTarget "VinylCollectorTests" */;
+			buildConfigurationList = F93AC5E52F8606C90050F7C0 /* Build configuration list for PBXNativeTarget "QollectorTests" */;
 			buildPhases = (
 				F93AC5CA2F8606C90050F7C0 /* Sources */,
 				F93AC5CB2F8606C90050F7C0 /* Frameworks */,
@@ -131,18 +131,18 @@
 				F93AC5D02F8606C90050F7C0 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				F93AC5D12F8606C90050F7C0 /* VinylCollectorTests */,
+				F93AC5D12F8606C90050F7C0 /* QollectorTests */,
 			);
-			name = VinylCollectorTests;
+			name = QollectorTests;
 			packageProductDependencies = (
 			);
-			productName = VinylCollectorTests;
-			productReference = F93AC5CE2F8606C90050F7C0 /* VinylCollectorTests.xctest */;
+			productName = QollectorTests;
+			productReference = F93AC5CE2F8606C90050F7C0 /* QollectorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		F93AC5D72F8606C90050F7C0 /* VinylCollectorUITests */ = {
+		F93AC5D72F8606C90050F7C0 /* QollectorUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F93AC5E82F8606C90050F7C0 /* Build configuration list for PBXNativeTarget "VinylCollectorUITests" */;
+			buildConfigurationList = F93AC5E82F8606C90050F7C0 /* Build configuration list for PBXNativeTarget "QollectorUITests" */;
 			buildPhases = (
 				F93AC5D42F8606C90050F7C0 /* Sources */,
 				F93AC5D52F8606C90050F7C0 /* Frameworks */,
@@ -154,13 +154,13 @@
 				F93AC5DA2F8606C90050F7C0 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				F93AC5DB2F8606C90050F7C0 /* VinylCollectorUITests */,
+				F93AC5DB2F8606C90050F7C0 /* QollectorUITests */,
 			);
-			name = VinylCollectorUITests;
+			name = QollectorUITests;
 			packageProductDependencies = (
 			);
-			productName = VinylCollectorUITests;
-			productReference = F93AC5D82F8606C90050F7C0 /* VinylCollectorUITests.xctest */;
+			productName = QollectorUITests;
+			productReference = F93AC5D82F8606C90050F7C0 /* QollectorUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -186,7 +186,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F93AC5B92F8606C80050F7C0 /* Build configuration list for PBXProject "VinylCollector" */;
+			buildConfigurationList = F93AC5B92F8606C80050F7C0 /* Build configuration list for PBXProject "Qollector" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -200,9 +200,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F93AC5BD2F8606C80050F7C0 /* VinylCollector */,
-				F93AC5CD2F8606C90050F7C0 /* VinylCollectorTests */,
-				F93AC5D72F8606C90050F7C0 /* VinylCollectorUITests */,
+				F93AC5BD2F8606C80050F7C0 /* Qollector */,
+				F93AC5CD2F8606C90050F7C0 /* QollectorTests */,
+				F93AC5D72F8606C90050F7C0 /* QollectorUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -258,12 +258,12 @@
 /* Begin PBXTargetDependency section */
 		F93AC5D02F8606C90050F7C0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F93AC5BD2F8606C80050F7C0 /* VinylCollector */;
+			target = F93AC5BD2F8606C80050F7C0 /* Qollector */;
 			targetProxy = F93AC5CF2F8606C90050F7C0 /* PBXContainerItemProxy */;
 		};
 		F93AC5DA2F8606C90050F7C0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F93AC5BD2F8606C80050F7C0 /* VinylCollector */;
+			target = F93AC5BD2F8606C80050F7C0 /* Qollector */;
 			targetProxy = F93AC5D92F8606C90050F7C0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -395,7 +395,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"VinylCollector/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Qollector/Preview Content\"";
 				DEVELOPMENT_TEAM = NDGQMAWBKP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -409,7 +409,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = GoblinEnterprise.VinylCollector;
+				PRODUCT_BUNDLE_IDENTIFIER = GoblinEnterprise.Qollector;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -424,7 +424,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"VinylCollector/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Qollector/Preview Content\"";
 				DEVELOPMENT_TEAM = NDGQMAWBKP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -438,7 +438,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = GoblinEnterprise.VinylCollector;
+				PRODUCT_BUNDLE_IDENTIFIER = GoblinEnterprise.Qollector;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -456,12 +456,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = GoblinEnterprise.VinylCollectorTests;
+				PRODUCT_BUNDLE_IDENTIFIER = GoblinEnterprise.QollectorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VinylCollector.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VinylCollector";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qollector.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Qollector";
 			};
 			name = Debug;
 		};
@@ -475,12 +475,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = GoblinEnterprise.VinylCollectorTests;
+				PRODUCT_BUNDLE_IDENTIFIER = GoblinEnterprise.QollectorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VinylCollector.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VinylCollector";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Qollector.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Qollector";
 			};
 			name = Release;
 		};
@@ -492,12 +492,12 @@
 				DEVELOPMENT_TEAM = NDGQMAWBKP;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = GoblinEnterprise.VinylCollectorUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = GoblinEnterprise.QollectorUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = VinylCollector;
+				TEST_TARGET_NAME = Qollector;
 			};
 			name = Debug;
 		};
@@ -509,19 +509,19 @@
 				DEVELOPMENT_TEAM = NDGQMAWBKP;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = GoblinEnterprise.VinylCollectorUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = GoblinEnterprise.QollectorUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = VinylCollector;
+				TEST_TARGET_NAME = Qollector;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F93AC5B92F8606C80050F7C0 /* Build configuration list for PBXProject "VinylCollector" */ = {
+		F93AC5B92F8606C80050F7C0 /* Build configuration list for PBXProject "Qollector" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F93AC5E02F8606C90050F7C0 /* Debug */,
@@ -530,7 +530,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F93AC5E22F8606C90050F7C0 /* Build configuration list for PBXNativeTarget "VinylCollector" */ = {
+		F93AC5E22F8606C90050F7C0 /* Build configuration list for PBXNativeTarget "Qollector" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F93AC5E32F8606C90050F7C0 /* Debug */,
@@ -539,7 +539,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F93AC5E52F8606C90050F7C0 /* Build configuration list for PBXNativeTarget "VinylCollectorTests" */ = {
+		F93AC5E52F8606C90050F7C0 /* Build configuration list for PBXNativeTarget "QollectorTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F93AC5E62F8606C90050F7C0 /* Debug */,
@@ -548,7 +548,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F93AC5E82F8606C90050F7C0 /* Build configuration list for PBXNativeTarget "VinylCollectorUITests" */ = {
+		F93AC5E82F8606C90050F7C0 /* Build configuration list for PBXNativeTarget "QollectorUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F93AC5E92F8606C90050F7C0 /* Debug */,
