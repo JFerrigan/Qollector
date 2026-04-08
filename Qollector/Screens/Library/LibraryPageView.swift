@@ -3,6 +3,7 @@ import SwiftUI
 
 struct LibraryPageView: View {
     @Environment(\.appThemePalette) private var palette
+    @Environment(\.appFontPreset) private var fontPreset
     @Query(sort: \RecordItem.updatedAt, order: .reverse) private var records: [RecordItem]
     @Query private var settings: [AppSettings]
     let onSelectRecord: (RecordItem) -> Void
@@ -33,7 +34,7 @@ struct LibraryPageView: View {
 
     private var emptyState: some View {
         Image(systemName: "square.stack.3d.up")
-            .font(.system(size: 28))
+            .font(fontPreset.font(size: 28))
             .foregroundStyle(palette.textSecondary)
         .frame(maxWidth: .infinity, alignment: .leading)
         .cardSurface(palette.secondaryBackground)

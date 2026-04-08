@@ -11,20 +11,34 @@ struct RatingControl: View {
             if style == .stars {
                 HStack(spacing: 10) {
                     ForEach(1...5, id: \.self) { star in
-                        let selected = starValue >= star
-                        Button {
-                            ratingValue = star * 2
-                        } label: {
-                            Image(systemName: selected ? "star.fill" : "star")
-                                .font(.title3)
-                                .foregroundStyle(selected ? Color.orange : palette.textSecondary)
-                                .frame(width: 36, height: 36)
-                                .background(
-                                    Circle()
-                                        .fill(palette.secondaryBackground)
-                                )
+                        ZStack {
+                            StarRatingView(
+                                ratingValue: symbolValue(for: star),
+                                size: 20,
+                                activeColor: .orange,
+                                inactiveColor: palette.textSecondary
+                            )
+
+                            HStack(spacing: 0) {
+                                Button {
+                                    ratingValue = (star * 2) - 1
+                                } label: {
+                                    Color.clear
+                                }
+
+                                Button {
+                                    ratingValue = star * 2
+                                } label: {
+                                    Color.clear
+                                }
+                            }
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
+                        .frame(width: 36, height: 36)
+                        .background(
+                            Circle()
+                                .fill(palette.secondaryBackground)
+                        )
                     }
                 }
             } else {
@@ -50,7 +64,7 @@ struct RatingControl: View {
         }
     }
 
-    private var starValue: Int {
-        max(1, Int(round(Double(ratingValue) / 2.0)))
+    private func symbolValue(for star: Int) -> Int {
+        min(max(ratingValue - ((star - 1) * 2), 0), 2)
     }
 }

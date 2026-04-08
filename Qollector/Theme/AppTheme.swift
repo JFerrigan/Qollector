@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct AppThemePalette {
     let background: Color
@@ -15,19 +16,28 @@ struct AppThemePalette {
 }
 
 enum AppTheme {
-    static func palette(for preset: AppBackgroundPreset) -> AppThemePalette {
-        AppThemePalette(
-            background: preset.backgroundColor,
-            secondaryBackground: preset.secondaryBackgroundColor,
-            surfaceRose: Color(red: 0.99, green: 0.90, blue: 0.90),
-            surfaceMint: Color(red: 0.88, green: 0.96, blue: 0.92),
-            surfaceSky: Color(red: 0.89, green: 0.94, blue: 0.99),
-            surfaceButter: Color(red: 0.99, green: 0.95, blue: 0.82),
-            line: Color(red: 0.87, green: 0.80, blue: 0.78),
-            textPrimary: Color(red: 0.17, green: 0.18, blue: 0.22),
-            textSecondary: Color(red: 0.40, green: 0.41, blue: 0.49),
-            accentFill: Color(red: 0.41, green: 0.34, blue: 0.42),
-            accentContent: Color(red: 0.95, green: 0.88, blue: 0.92)
+    static func palette(background: AppColorPreset, ui: AppColorPreset) -> AppThemePalette {
+        let backgroundColor = background.uiColor
+        let uiColor = ui.uiColor
+        let elevatedSurface = uiColor.mixed(with: backgroundColor, amount: 0.28).lightened(by: 0.34)
+        let deeperSurface = uiColor.mixed(with: backgroundColor, amount: 0.18).lightened(by: 0.22)
+        let lineColor = uiColor.mixed(with: backgroundColor, amount: 0.68).darkened(by: 0.08)
+        let primaryTextBase = backgroundColor.isLight ? UIColor.black : UIColor.white
+        let secondaryTextBase = backgroundColor.isLight ? UIColor.black : UIColor.white
+        let accentBase = uiColor.darkened(by: uiColor.isLight ? 0.22 : -0.08)
+
+        return AppThemePalette(
+            background: Color(uiColor: backgroundColor.lightened(by: backgroundColor.isLight ? 0.02 : 0.06)),
+            secondaryBackground: Color(uiColor: backgroundColor.mixed(with: uiColor, amount: 0.08).lightened(by: backgroundColor.isLight ? 0.07 : 0.12)),
+            surfaceRose: Color(uiColor: uiColor.mixed(with: backgroundColor, amount: 0.18).lightened(by: 0.36)),
+            surfaceMint: Color(uiColor: elevatedSurface),
+            surfaceSky: Color(uiColor: uiColor.mixed(with: backgroundColor, amount: 0.32).lightened(by: 0.30)),
+            surfaceButter: Color(uiColor: deeperSurface),
+            line: Color(uiColor: lineColor),
+            textPrimary: Color(uiColor: primaryTextBase.withAlphaComponent(backgroundColor.isLight ? 0.86 : 0.92)),
+            textSecondary: Color(uiColor: secondaryTextBase.withAlphaComponent(backgroundColor.isLight ? 0.58 : 0.72)),
+            accentFill: Color(uiColor: accentBase),
+            accentContent: Color(uiColor: accentBase.accessibleForeground)
         )
     }
 
@@ -37,8 +47,53 @@ enum AppTheme {
     static let innerRadius: CGFloat = 18
 }
 
+private extension UIColor {
+    var rgba: (CGFloat, CGFloat, CGFloat, CGFloat) {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        return (red, green, blue, alpha)
+    }
+
+    var isLight: Bool {
+        let (red, green, blue, _) = rgba
+        let luminance = (0.299 * red) + (0.587 * green) + (0.114 * blue)
+        return luminance > 0.62
+    }
+
+    var accessibleForeground: UIColor {
+        isLight ? .black : .white
+    }
+
+    func mixed(with other: UIColor, amount: CGFloat) -> UIColor {
+        let clamped = min(max(amount, 0), 1)
+        let (red1, green1, blue1, alpha1) = rgba
+        let (red2, green2, blue2, alpha2) = other.rgba
+        return UIColor(
+            red: (red1 * (1 - clamped)) + (red2 * clamped),
+            green: (green1 * (1 - clamped)) + (green2 * clamped),
+            blue: (blue1 * (1 - clamped)) + (blue2 * clamped),
+            alpha: (alpha1 * (1 - clamped)) + (alpha2 * clamped)
+        )
+    }
+
+    func lightened(by amount: CGFloat) -> UIColor {
+        mixed(with: .white, amount: amount)
+    }
+
+    func darkened(by amount: CGFloat) -> UIColor {
+        if amount < 0 {
+            return lightened(by: abs(amount))
+        }
+
+        return mixed(with: .black, amount: amount)
+    }
+}
+
 private struct AppThemePaletteKey: EnvironmentKey {
-    static let defaultValue = AppTheme.palette(for: .rose)
+    static let defaultValue = AppTheme.palette(background: .paper, ui: .rose)
 }
 
 private struct AppFontPresetKey: EnvironmentKey {
@@ -54,6 +109,14 @@ extension EnvironmentValues {
     var appFontPreset: AppFontPreset {
         get { self[AppFontPresetKey.self] }
         set { self[AppFontPresetKey.self] = newValue }
+    }
+}
+
+struct AppFontModifier: ViewModifier {
+    let preset: AppFontPreset
+
+    func body(content: Content) -> some View {
+        content.font(preset.textStyle(.body))
     }
 }
 
@@ -76,6 +139,10 @@ struct CardSurface: ViewModifier {
 }
 
 extension View {
+    func appFont(_ preset: AppFontPreset) -> some View {
+        modifier(AppFontModifier(preset: preset))
+    }
+
     func cardSurface(_ fill: Color) -> some View {
         modifier(CardSurface(fill: fill))
     }

@@ -3,6 +3,7 @@ import SwiftUI
 
 struct SearchPageView: View {
     @Environment(\.appThemePalette) private var palette
+    @Environment(\.appFontPreset) private var fontPreset
     @Query(sort: \RecordItem.title) private var records: [RecordItem]
     @Query private var settings: [AppSettings]
     @State private var searchText = ""
@@ -12,6 +13,7 @@ struct SearchPageView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: AppTheme.sectionSpacing) {
                 TextField("Search", text: $searchText)
+                    .font(fontPreset.textStyle(.body))
                     .padding(16)
                     .background(
                         RoundedRectangle(cornerRadius: AppTheme.cardRadius, style: .continuous)
@@ -24,7 +26,7 @@ struct SearchPageView: View {
 
                 if filteredRecords.isEmpty {
                     Image(systemName: "magnifyingglass")
-                        .font(.system(size: 24))
+                        .font(fontPreset.font(size: 24))
                         .foregroundStyle(palette.textSecondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .cardSurface(palette.secondaryBackground)

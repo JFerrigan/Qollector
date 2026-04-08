@@ -49,9 +49,18 @@ struct RecordDetailView: View {
                                 .font(fontPreset.textStyle(.title3))
                                 .foregroundStyle(palette.textSecondary)
 
-                            Text(ratingText)
-                                .font(fontPreset.textStyle(.subheadline, weight: .semibold))
-                                .foregroundStyle(palette.textPrimary)
+                            if settings.first?.preferredRatingStyle ?? .stars == .stars {
+                                StarRatingView(
+                                    ratingValue: record.ratingValue,
+                                    size: 14,
+                                    activeColor: palette.textPrimary,
+                                    inactiveColor: palette.textSecondary
+                                )
+                            } else {
+                                Text(ratingText)
+                                    .font(fontPreset.textStyle(.subheadline, weight: .semibold))
+                                    .foregroundStyle(palette.textPrimary)
+                            }
                         }
                     }
                     .cardSurface(palette.secondaryBackground)
@@ -66,7 +75,7 @@ struct RecordDetailView: View {
 
                     VStack(alignment: .leading, spacing: 10) {
                         Text(record.notes.isEmpty ? "—" : record.notes)
-                            .font(.body)
+                            .font(fontPreset.textStyle(.body))
                             .foregroundStyle(record.notes.isEmpty ? palette.textSecondary : palette.textPrimary)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -87,7 +96,7 @@ struct RecordDetailView: View {
                         onClose()
                     } label: {
                         Text("Delete")
-                            .font(.headline)
+                            .font(fontPreset.textStyle(.headline, weight: .semibold))
                             .frame(maxWidth: .infinity)
                     }
                     .padding(.vertical, 16)
@@ -175,13 +184,7 @@ struct RecordDetailView: View {
     }
 
     private var ratingText: String {
-        switch settings.first?.preferredRatingStyle ?? .stars {
-        case .stars:
-            let stars = max(1, Int(round(Double(record.ratingValue) / 2.0)))
-            return String(repeating: "★", count: stars)
-        case .tenPoint:
-            return "\(record.ratingValue)/10"
-        }
+        "\(record.ratingValue)/10"
     }
 
     private var addedText: String {

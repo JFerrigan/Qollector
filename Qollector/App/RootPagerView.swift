@@ -46,6 +46,7 @@ struct RootPagerView: View {
             .animation(.spring(response: 0.32, dampingFraction: 0.86), value: selectedRecord != nil)
             .environment(\.appThemePalette, palette)
             .environment(\.appFontPreset, fontPreset)
+            .appFont(fontPreset)
         }
     }
 
@@ -62,7 +63,10 @@ struct RootPagerView: View {
     }
 
     private var palette: AppThemePalette {
-        AppTheme.palette(for: activeSettings?.backgroundPreset ?? .rose)
+        AppTheme.palette(
+            background: activeSettings?.backgroundColor ?? .paper,
+            ui: activeSettings?.uiColor ?? .rose
+        )
     }
 
     private var fontPreset: AppFontPreset {

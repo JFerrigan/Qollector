@@ -107,6 +107,7 @@ struct RecordFormView: View {
                         Text(pattern.title).tag(pattern)
                     }
                 }
+                .font(fontPreset.textStyle(.subheadline, weight: .semibold))
                 .pickerStyle(.segmented)
             }
         }
@@ -129,6 +130,7 @@ struct RecordFormView: View {
     private func textField(_ title: String, text: Binding<String>, prompt: String? = nil, keyboardType: UIKeyboardType = .default) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             TextField(prompt ?? title, text: text)
+                .font(fontPreset.textStyle(.body))
                 .keyboardType(keyboardType)
                 .textInputAutocapitalization(.words)
                 .padding(14)
@@ -141,12 +143,42 @@ struct RecordFormView: View {
 
     private func tokenPicker(_ title: String, selection: Binding<VinylColorToken>) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            Picker(title, selection: selection) {
+            Text(title)
+                .font(fontPreset.textStyle(.subheadline, weight: .semibold))
+                .foregroundStyle(palette.textPrimary)
+
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 88), spacing: 8)], spacing: 8) {
                 ForEach(VinylColorToken.allCases) { token in
-                    Text(token.rawValue.capitalized).tag(token)
+                    Button {
+                        selection.wrappedValue = token
+                    } label: {
+                        HStack(spacing: 8) {
+                            Circle()
+                                .fill(token.color)
+                                .frame(width: 14, height: 14)
+
+                            Text(token.title)
+                                .font(fontPreset.textStyle(.caption, weight: .semibold))
+                                .foregroundStyle(selection.wrappedValue == token ? palette.accentContent : palette.textPrimary)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                .fill(selection.wrappedValue == token ? palette.accentFill : palette.secondaryBackground)
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                .stroke(
+                                    selection.wrappedValue == token ? palette.accentFill : palette.line.opacity(0.7),
+                                    lineWidth: selection.wrappedValue == token ? 2 : 1
+                                )
+                        )
+                    }
+                    .buttonStyle(.plain)
                 }
             }
-            .pickerStyle(.menu)
         }
     }
 

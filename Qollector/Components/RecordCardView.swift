@@ -29,12 +29,21 @@ struct RecordCardView: View {
                         Label(record.genre, systemImage: "music.note.list")
                     }
                 }
-                .font(.caption)
+                .font(fontPreset.textStyle(.caption))
                 .foregroundStyle(palette.textSecondary)
 
-                Text(formattedRating)
-                    .font(fontPreset.textStyle(.caption, weight: .semibold))
-                    .foregroundStyle(palette.textPrimary)
+                if ratingStyle == .stars {
+                    StarRatingView(
+                        ratingValue: record.ratingValue,
+                        size: 12,
+                        activeColor: palette.textPrimary,
+                        inactiveColor: palette.textSecondary
+                    )
+                } else {
+                    Text(formattedRating)
+                        .font(fontPreset.textStyle(.caption, weight: .semibold))
+                        .foregroundStyle(palette.textPrimary)
+                }
 
                 if !record.tags.isEmpty {
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -53,12 +62,6 @@ struct RecordCardView: View {
     }
 
     private var formattedRating: String {
-        switch ratingStyle {
-        case .stars:
-            let stars = max(1, Int(round(Double(record.ratingValue) / 2.0)))
-            return String(repeating: "★", count: stars)
-        case .tenPoint:
-            return "\(record.ratingValue)/10"
-        }
+        "\(record.ratingValue)/10"
     }
 }

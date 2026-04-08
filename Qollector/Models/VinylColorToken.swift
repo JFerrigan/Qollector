@@ -12,6 +12,10 @@ enum VinylColorToken: String, Codable, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
+    var title: String {
+        rawValue.capitalized
+    }
+
     var color: Color {
         switch self {
         case .peach:
@@ -33,4 +37,3 @@ enum VinylColorToken: String, Codable, CaseIterable, Identifiable {
         }
     }
 }
-
