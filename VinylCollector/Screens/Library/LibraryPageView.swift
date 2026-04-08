@@ -9,12 +9,6 @@ struct LibraryPageView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: AppTheme.sectionSpacing) {
-                PageSectionHeader(
-                    eyebrow: "Collection",
-                    title: "Your Vinyl Shelf",
-                    subtitle: "Swipe sideways to search, add a record, or change settings."
-                )
-
                 summaryBanner
 
                 if records.isEmpty {
@@ -40,14 +34,9 @@ struct LibraryPageView: View {
 
     private var summaryBanner: some View {
         HStack {
-            VStack(alignment: .leading, spacing: 6) {
-                Text("\(records.count) records")
-                    .font(.headline)
-                    .foregroundStyle(AppTheme.textPrimary)
-                Text("Built for local-first collecting with tags, notes, and icon recipes.")
-                    .font(.subheadline)
-                    .foregroundStyle(AppTheme.textSecondary)
-            }
+            Text("\(records.count)")
+                .font(.system(size: 34, weight: .bold, design: .rounded))
+                .foregroundStyle(AppTheme.textPrimary)
             Spacer()
             Image(systemName: "square.stack.3d.up.fill")
                 .font(.title2)
@@ -57,13 +46,9 @@ struct LibraryPageView: View {
     }
 
     private var emptyState: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Nothing on the shelf yet.")
-                .font(.headline)
-            Text("Swipe right to add your first record and it will land here.")
-                .font(.subheadline)
-                .foregroundStyle(AppTheme.textSecondary)
-        }
+        Image(systemName: "square.stack.3d.up")
+            .font(.system(size: 28))
+            .foregroundStyle(AppTheme.textSecondary)
         .frame(maxWidth: .infinity, alignment: .leading)
         .cardSurface(AppTheme.secondaryBackground)
     }
@@ -72,4 +57,3 @@ struct LibraryPageView: View {
         settings.first?.preferredRatingStyle ?? .stars
     }
 }
-

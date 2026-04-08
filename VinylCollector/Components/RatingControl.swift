@@ -6,10 +6,6 @@ struct RatingControl: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Rating")
-                .font(.headline)
-                .foregroundStyle(AppTheme.textPrimary)
-
             if style == .stars {
                 HStack(spacing: 10) {
                     ForEach(1...5, id: \.self) { star in
@@ -56,4 +52,3 @@ struct RatingControl: View {
         max(1, Int(round(Double(ratingValue) / 2.0)))
     }
 }
-

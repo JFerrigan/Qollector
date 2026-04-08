@@ -10,13 +10,7 @@ struct SearchPageView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: AppTheme.sectionSpacing) {
-                PageSectionHeader(
-                    eyebrow: "Search",
-                    title: "Find Something Fast",
-                    subtitle: "Search your local library by title, artist, notes, genre, or tags."
-                )
-
-                TextField("Search local records", text: $searchText)
+                TextField("Search", text: $searchText)
                     .padding(16)
                     .background(
                         RoundedRectangle(cornerRadius: AppTheme.cardRadius, style: .continuous)
@@ -28,13 +22,9 @@ struct SearchPageView: View {
                     )
 
                 if filteredRecords.isEmpty {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text(searchText.isEmpty ? "Search your shelf." : "No matching records.")
-                            .font(.headline)
-                        Text(searchText.isEmpty ? "Your records will appear here once you start filtering." : "Try a title, artist, genre, note, or tag.")
-                            .font(.subheadline)
-                            .foregroundStyle(AppTheme.textSecondary)
-                    }
+                    Image(systemName: "magnifyingglass")
+                        .font(.system(size: 24))
+                        .foregroundStyle(AppTheme.textSecondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .cardSurface(AppTheme.secondaryBackground)
                 } else {
@@ -81,4 +71,3 @@ struct SearchPageView: View {
         settings.first?.preferredRatingStyle ?? .stars
     }
 }
-

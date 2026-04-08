@@ -9,8 +9,8 @@ struct AddRecordPageView: View {
 
     var body: some View {
         RecordFormView(
-            title: "Add A Record",
-            saveButtonTitle: "Save To Library",
+            title: "",
+            saveButtonTitle: "Save",
             ratingStyle: settings.first?.preferredRatingStyle ?? .stars,
             draft: $draft
         ) {
@@ -21,4 +21,3 @@ struct AddRecordPageView: View {
         .accessibilityIdentifier("page.add")
     }
 }
-

@@ -16,22 +16,19 @@ struct EditRecordView: View {
     var body: some View {
         NavigationStack {
             RecordFormView(
-                title: "Edit Record",
-                saveButtonTitle: "Save Changes",
+                title: "",
+                saveButtonTitle: "Save",
                 ratingStyle: settings.first?.preferredRatingStyle ?? .stars,
                 draft: $draft
             ) {
                 RecordEditor.update(record: record, from: draft, in: modelContext)
                 dismiss()
             }
-            .navigationTitle("Edit")
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Cancel") { dismiss() }
+                    Button("Close") { dismiss() }
                 }
             }
         }
     }
 }
-
