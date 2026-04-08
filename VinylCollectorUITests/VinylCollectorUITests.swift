@@ -23,12 +23,22 @@ final class VinylCollectorUITests: XCTestCase {
     }
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testAppLaunchesIntoLibraryPage() throws {
         let app = XCUIApplication()
         app.launch()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        XCTAssertTrue(app.otherElements["page.library"].waitForExistence(timeout: 3))
+    }
+
+    @MainActor
+    func testCanSwipeToSettingsPage() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        app.swipeLeft()
+        app.swipeLeft()
+
+        XCTAssertTrue(app.otherElements["page.settings"].waitForExistence(timeout: 3))
     }
 
     @MainActor

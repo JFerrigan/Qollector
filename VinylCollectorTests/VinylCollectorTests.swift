@@ -10,8 +10,16 @@ import Testing
 
 struct VinylCollectorTests {
 
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+    @Test func iconRecipeFactoryIsCaseInsensitive() async throws {
+        let first = RecordIconRecipeFactory.makeRecipe(title: "Discovery", artist: "Daft Punk")
+        let second = RecordIconRecipeFactory.makeRecipe(title: " discovery ", artist: "DAFT PUNK")
+
+        #expect(first == second)
+    }
+
+    @Test func tagNormalizationCollapsesDuplicates() async throws {
+        let names = RecordEditor.resolvedTagsPreviewNames(from: "Jazz, jazz,  JAZZ , Favorites")
+        #expect(names == ["favorites", "jazz"])
     }
 
 }
