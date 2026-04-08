@@ -7,7 +7,8 @@
 - Browsing should feel like moving through a personal collection shelf rather than a spreadsheet.
 
 ## Tokens
-- Backgrounds: warm paper, rose tint, mint tint, powder blue, peach accent.
+- Background presets: warm paper, rose tint, mint tint, powder blue, peach accent.
+- Font presets: 5 curated options chosen for readability and personality, applied through shared theme tokens rather than per-view overrides.
 - Typography roles: display, section title, card title, metadata, caption.
 - Spacing scale: 4, 8, 12, 16, 20, 28, 36.
 - Radii: 12, 20, 28.
@@ -25,4 +26,4 @@
 - Add/Edit prioritizes low-friction form entry.
 - Search results should mirror the library card language.
 - Settings should explain rating mode clearly because it affects global presentation.
-
+- Settings should present font and background options as fixed presets, with immediate whole-app preview when changed.

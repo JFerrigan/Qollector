@@ -13,31 +13,43 @@ struct RootPagerView: View {
 
     var body: some View {
         NavigationStack {
-            TabView(selection: $selectedPage) {
-                SearchPageView(onSelectRecord: openRecord)
-                    .tag(RootPage.search)
+            ZStack {
+                TabView(selection: $selectedPage) {
+                    SearchPageView(onSelectRecord: openRecord)
+                        .tag(RootPage.search)
 
-                LibraryPageView(onSelectRecord: openRecord)
-                    .tag(RootPage.library)
+                    LibraryPageView(onSelectRecord: openRecord)
+                        .tag(RootPage.library)
 
-                AddRecordPageView {
-                    selectedPage = .library
+                    AddRecordPageView {
+                        selectedPage = .library
+                    }
+                    .tag(RootPage.add)
+
+                    SettingsPageView()
+                        .tag(RootPage.settings)
                 }
-                .tag(RootPage.add)
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                .background(AppTheme.background.ignoresSafeArea())
 
-                SettingsPageView()
-                    .tag(RootPage.settings)
+                if let selectedRecord {
+                    RecordDetailView(
+                        record: selectedRecord,
+                        onClose: closeRecord
+                    )
+                    .zIndex(1)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
             }
-            .tabViewStyle(.page(indexDisplayMode: .never))
-            .background(AppTheme.background.ignoresSafeArea())
-            .sheet(item: $selectedRecord) { record in
-                RecordDetailView(record: record)
-            }
+            .animation(.spring(response: 0.32, dampingFraction: 0.86), value: selectedRecord != nil)
         }
     }
 
     private func openRecord(_ record: RecordItem) {
         selectedRecord = record
     }
-}
 
+    private func closeRecord() {
+        selectedRecord = nil
+    }
+}

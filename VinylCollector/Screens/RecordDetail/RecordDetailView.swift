@@ -2,14 +2,37 @@ import SwiftData
 import SwiftUI
 
 struct RecordDetailView: View {
-    @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @Query private var settings: [AppSettings]
     @State private var isEditing = false
+    @GestureState private var dragOffset: CGFloat = 0
+
     let record: RecordItem
+    let onClose: () -> Void
 
     var body: some View {
-        NavigationStack {
+        GeometryReader { proxy in
+            ZStack(alignment: .bottom) {
+                Color.black.opacity(backdropOpacity)
+                    .ignoresSafeArea()
+                    .contentShape(Rectangle())
+                    .onTapGesture(perform: onClose)
+
+                detailSurface(height: proxy.size.height)
+                    .offset(y: max(0, dragOffset))
+                    .gesture(dismissGesture)
+            }
+            .ignoresSafeArea(edges: .bottom)
+        }
+        .sheet(isPresented: $isEditing) {
+            EditRecordView(record: record)
+        }
+    }
+
+    private func detailSurface(height: CGFloat) -> some View {
+        VStack(spacing: 0) {
+            topBar
+
             ScrollView {
                 VStack(alignment: .leading, spacing: AppTheme.sectionSpacing) {
                     HStack(alignment: .top, spacing: 18) {
@@ -27,6 +50,10 @@ struct RecordDetailView: View {
                             Text(ratingText)
                                 .font(.subheadline.weight(.semibold))
                                 .foregroundStyle(AppTheme.textPrimary)
+
+                            Text("Swipe down to close")
+                                .font(.caption)
+                                .foregroundStyle(AppTheme.textSecondary)
                         }
                     }
                     .cardSurface(AppTheme.secondaryBackground)
@@ -64,7 +91,7 @@ struct RecordDetailView: View {
 
                     Button(role: .destructive) {
                         RecordEditor.delete(record: record, in: modelContext)
-                        dismiss()
+                        onClose()
                     } label: {
                         Text("Delete Record")
                             .font(.headline)
@@ -77,21 +104,51 @@ struct RecordDetailView: View {
                     )
                 }
                 .padding(AppTheme.outerPadding)
+                .padding(.bottom, 18)
             }
-            .background(AppTheme.background)
-            .navigationTitle("Record")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button("Close") { dismiss() }
+            .scrollIndicators(.hidden)
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: height * 0.9, alignment: .top)
+        .background(
+            RoundedRectangle(cornerRadius: 34, style: .continuous)
+                .fill(AppTheme.background)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 34, style: .continuous)
+                .stroke(AppTheme.line.opacity(0.6), lineWidth: 1)
+        )
+        .shadow(color: .black.opacity(0.14), radius: 28, y: -8)
+    }
+
+    private var topBar: some View {
+        VStack(spacing: 12) {
+            Capsule(style: .continuous)
+                .fill(AppTheme.line)
+                .frame(width: 52, height: 6)
+                .padding(.top, 12)
+
+            HStack {
+                Button("Done", action: onClose)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(AppTheme.textSecondary)
+
+                Spacer()
+
+                Text("Record")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(AppTheme.textSecondary)
+
+                Spacer()
+
+                Button("Edit") {
+                    isEditing = true
                 }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Edit") { isEditing = true }
-                }
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(AppTheme.textPrimary)
             }
-            .sheet(isPresented: $isEditing) {
-                EditRecordView(record: record)
-            }
+            .padding(.horizontal, AppTheme.outerPadding)
+            .padding(.bottom, 4)
         }
     }
 
@@ -104,6 +161,24 @@ struct RecordDetailView: View {
                 .foregroundStyle(AppTheme.textPrimary)
         }
         .font(.subheadline)
+    }
+
+    private var dismissGesture: some Gesture {
+        DragGesture(minimumDistance: 8)
+            .updating($dragOffset) { value, state, _ in
+                guard value.translation.height > 0 else { return }
+                state = value.translation.height
+            }
+            .onEnded { value in
+                if value.translation.height > 140 || value.predictedEndTranslation.height > 220 {
+                    onClose()
+                }
+            }
+    }
+
+    private var backdropOpacity: Double {
+        let progress = min(max(dragOffset / 220, 0), 1)
+        return 0.18 * (1 - progress)
     }
 
     private var ratingText: String {
@@ -128,4 +203,3 @@ private struct FlowTagLayout: View {
         }
     }
 }
-

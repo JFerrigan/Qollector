@@ -16,6 +16,8 @@ VinylCollector is an iPhone-first record collection app with a calm pastel visua
 - Users can edit or delete records from the detail view.
 - Search covers title, artist, genre, notes, and tags.
 - Rating defaults to 5 stars and can be switched in settings to a 1-10 scale.
+- Users can choose an app font from a fixed set of 5 curated type styles.
+- Users can choose the app background color theme from a fixed set of 5 pastel options.
 - Tags are reusable and user-defined.
 - Each record gets an automatically generated icon recipe based on a deterministic hash of record title + artist, ignoring case.
 - Users can override the auto-generated icon recipe by selecting preset colors and patterns.
@@ -30,5 +32,5 @@ VinylCollector is an iPhone-first record collection app with a calm pastel visua
 - The app feels like a finished shell instead of a template.
 - The visual language is centralized in reusable theme primitives.
 - Core record CRUD, local search, tags, ratings, and icon generation all work with local persistence.
+- Global visual preferences for font and background theme can be changed from settings and applied across the app.
 - The architecture leaves room for a future online catalog provider without reworking the local model layer.
-
