@@ -9,38 +9,7 @@ struct RatingControl: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             if style == .stars {
-                HStack(spacing: 10) {
-                    ForEach(1...5, id: \.self) { star in
-                        ZStack {
-                            StarRatingView(
-                                ratingValue: symbolValue(for: star),
-                                size: 20,
-                                activeColor: .orange,
-                                inactiveColor: palette.textSecondary
-                            )
-
-                            HStack(spacing: 0) {
-                                Button {
-                                    ratingValue = (star * 2) - 1
-                                } label: {
-                                    Color.clear
-                                }
-
-                                Button {
-                                    ratingValue = star * 2
-                                } label: {
-                                    Color.clear
-                                }
-                            }
-                            .buttonStyle(.plain)
-                        }
-                        .frame(width: 36, height: 36)
-                        .background(
-                            Circle()
-                                .fill(palette.secondaryBackground)
-                        )
-                    }
-                }
+                starSelector
             } else {
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 5), spacing: 8) {
                     ForEach(1...10, id: \.self) { value in
@@ -64,7 +33,47 @@ struct RatingControl: View {
         }
     }
 
-    private func symbolValue(for star: Int) -> Int {
-        min(max(ratingValue - ((star - 1) * 2), 0), 2)
+    private var starSelector: some View {
+        HStack(spacing: 8) {
+            ForEach(1...StarRatingValue.starCount, id: \.self) { star in
+                starCell(for: star)
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Rating")
+        .accessibilityValue(StarRatingValue.accessibilityLabel(for: ratingValue))
+    }
+
+    private func starCell(for star: Int) -> some View {
+        let fillState = StarRatingValue.fillState(for: star, ratingValue: ratingValue)
+
+        return ZStack {
+            Circle()
+                .fill(palette.secondaryBackground)
+                .frame(width: 44, height: 44)
+
+            Image(systemName: fillState.symbolName)
+                .font(.system(size: 20))
+                .foregroundStyle(fillState == .empty ? palette.textSecondary : .orange)
+
+            HStack(spacing: 0) {
+                starHalfButton(value: (star * 2) - 1)
+                starHalfButton(value: star * 2)
+            }
+            .frame(width: 44, height: 44)
+        }
+    }
+
+    private func starHalfButton(value: Int) -> some View {
+        Button {
+            ratingValue = value
+        } label: {
+            Color.clear
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(StarRatingValue.accessibilityLabel(for: value))
+        .accessibilityAddTraits(value == ratingValue ? .isSelected : [])
     }
 }

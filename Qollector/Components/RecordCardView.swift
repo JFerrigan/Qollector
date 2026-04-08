@@ -62,6 +62,6 @@ struct RecordCardView: View {
     }
 
     private var formattedRating: String {
-        "\(record.ratingValue)/10"
+        StarRatingValue.tenPointLabel(for: record.ratingValue)
     }
 }

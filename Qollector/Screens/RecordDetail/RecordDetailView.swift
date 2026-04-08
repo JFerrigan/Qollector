@@ -58,7 +58,7 @@ struct RecordDetailView: View {
                                 )
                             } else {
                                 Text(ratingText)
-                                    .font(fontPreset.textStyle(.subheadline, weight: .semibold))
+                                    .font(fontPreset.textStyle(.caption))
                                     .foregroundStyle(palette.textPrimary)
                             }
                         }
@@ -184,7 +184,7 @@ struct RecordDetailView: View {
     }
 
     private var ratingText: String {
-        "\(record.ratingValue)/10"
+        StarRatingValue.tenPointLabel(for: record.ratingValue)
     }
 
     private var addedText: String {
