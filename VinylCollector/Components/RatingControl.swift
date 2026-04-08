@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct RatingControl: View {
+    @Environment(\.appThemePalette) private var palette
+    @Environment(\.appFontPreset) private var fontPreset
     let style: RatingStyle
     @Binding var ratingValue: Int
 
@@ -15,11 +17,11 @@ struct RatingControl: View {
                         } label: {
                             Image(systemName: selected ? "star.fill" : "star")
                                 .font(.title3)
-                                .foregroundStyle(selected ? Color.orange : AppTheme.textSecondary)
+                                .foregroundStyle(selected ? Color.orange : palette.textSecondary)
                                 .frame(width: 36, height: 36)
                                 .background(
                                     Circle()
-                                        .fill(AppTheme.secondaryBackground)
+                                        .fill(palette.secondaryBackground)
                                 )
                         }
                         .buttonStyle(.plain)
@@ -32,13 +34,13 @@ struct RatingControl: View {
                             ratingValue = value
                         } label: {
                             Text("\(value)")
-                                .font(.subheadline.weight(.semibold))
-                                .foregroundStyle(value == ratingValue ? Color.white : AppTheme.textPrimary)
+                                .font(fontPreset.textStyle(.subheadline, weight: .semibold))
+                                .foregroundStyle(value == ratingValue ? Color.white : palette.textPrimary)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 10)
                                 .background(
                                     RoundedRectangle(cornerRadius: 14, style: .continuous)
-                                        .fill(value == ratingValue ? AppTheme.textPrimary : AppTheme.secondaryBackground)
+                                        .fill(value == ratingValue ? palette.textPrimary : palette.secondaryBackground)
                                 )
                         }
                         .buttonStyle(.plain)

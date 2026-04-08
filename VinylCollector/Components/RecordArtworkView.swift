@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct RecordArtworkView: View {
+    @Environment(\.appThemePalette) private var palette
     let recipe: RecordIconRecipe
     var size: CGFloat = 96
 
@@ -23,7 +24,7 @@ struct RecordArtworkView: View {
         .frame(width: size, height: size)
         .overlay(
             RoundedRectangle(cornerRadius: size * 0.22, style: .continuous)
-                .stroke(AppTheme.line.opacity(0.35), lineWidth: 1)
+                .stroke(palette.line.opacity(0.35), lineWidth: 1)
         )
     }
 
@@ -74,4 +75,3 @@ struct RecordArtworkView: View {
         }
     }
 }
-

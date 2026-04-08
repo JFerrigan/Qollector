@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct RecordCardView: View {
+    @Environment(\.appThemePalette) private var palette
+    @Environment(\.appFontPreset) private var fontPreset
     let record: RecordItem
     let ratingStyle: RatingStyle
 
@@ -11,11 +13,11 @@ struct RecordCardView: View {
             VStack(alignment: .leading, spacing: 10) {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(record.title)
-                        .font(.headline)
-                        .foregroundStyle(AppTheme.textPrimary)
+                        .font(fontPreset.textStyle(.headline, weight: .semibold))
+                        .foregroundStyle(palette.textPrimary)
                     Text(record.artist)
-                        .font(.subheadline)
-                        .foregroundStyle(AppTheme.textSecondary)
+                        .font(fontPreset.textStyle(.subheadline))
+                        .foregroundStyle(palette.textSecondary)
                 }
 
                 HStack(spacing: 10) {
@@ -28,11 +30,11 @@ struct RecordCardView: View {
                     }
                 }
                 .font(.caption)
-                .foregroundStyle(AppTheme.textSecondary)
+                .foregroundStyle(palette.textSecondary)
 
                 Text(formattedRating)
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(AppTheme.textPrimary)
+                    .font(fontPreset.textStyle(.caption, weight: .semibold))
+                    .foregroundStyle(palette.textPrimary)
 
                 if !record.tags.isEmpty {
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -47,7 +49,7 @@ struct RecordCardView: View {
 
             Spacer(minLength: 0)
         }
-        .cardSurface(AppTheme.secondaryBackground)
+        .cardSurface(palette.secondaryBackground)
     }
 
     private var formattedRating: String {
@@ -60,4 +62,3 @@ struct RecordCardView: View {
         }
     }
 }
-

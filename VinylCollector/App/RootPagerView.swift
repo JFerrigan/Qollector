@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 enum RootPage: Int, CaseIterable {
     case search
@@ -8,6 +9,7 @@ enum RootPage: Int, CaseIterable {
 }
 
 struct RootPagerView: View {
+    @Query private var settings: [AppSettings]
     @State private var selectedPage: RootPage = .library
     @State private var selectedRecord: RecordItem?
 
@@ -30,7 +32,7 @@ struct RootPagerView: View {
                         .tag(RootPage.settings)
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
-                .background(AppTheme.background.ignoresSafeArea())
+                .background(palette.background.ignoresSafeArea())
 
                 if let selectedRecord {
                     RecordDetailView(
@@ -42,6 +44,8 @@ struct RootPagerView: View {
                 }
             }
             .animation(.spring(response: 0.32, dampingFraction: 0.86), value: selectedRecord != nil)
+            .environment(\.appThemePalette, palette)
+            .environment(\.appFontPreset, fontPreset)
         }
     }
 
@@ -51,5 +55,17 @@ struct RootPagerView: View {
 
     private func closeRecord() {
         selectedRecord = nil
+    }
+
+    private var activeSettings: AppSettings? {
+        settings.first
+    }
+
+    private var palette: AppThemePalette {
+        AppTheme.palette(for: activeSettings?.backgroundPreset ?? .paper)
+    }
+
+    private var fontPreset: AppFontPreset {
+        activeSettings?.fontPreset ?? .rounded
     }
 }

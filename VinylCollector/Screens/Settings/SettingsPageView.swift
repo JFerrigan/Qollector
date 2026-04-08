@@ -2,6 +2,7 @@ import SwiftData
 import SwiftUI
 
 struct SettingsPageView: View {
+    @Environment(\.appThemePalette) private var palette
     @Environment(\.modelContext) private var modelContext
     @Query private var settings: [AppSettings]
 
@@ -22,11 +23,43 @@ struct SettingsPageView: View {
                     }
                     .pickerStyle(.segmented)
                 }
-                .cardSurface(AppTheme.surfaceSky)
+                .cardSurface(palette.surfaceSky)
+
+                VStack(alignment: .leading, spacing: 16) {
+                    Picker("Font", selection: Binding(
+                        get: { activeSettings.fontPreset },
+                        set: { newValue in
+                            activeSettings.fontPreset = newValue
+                            try? modelContext.save()
+                        }
+                    )) {
+                        ForEach(AppFontPreset.allCases) { preset in
+                            Text(preset.title).tag(preset)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                }
+                .cardSurface(palette.surfaceRose)
+
+                VStack(alignment: .leading, spacing: 16) {
+                    Picker("Background", selection: Binding(
+                        get: { activeSettings.backgroundPreset },
+                        set: { newValue in
+                            activeSettings.backgroundPreset = newValue
+                            try? modelContext.save()
+                        }
+                    )) {
+                        ForEach(AppBackgroundPreset.allCases) { preset in
+                            Text(preset.title).tag(preset)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                }
+                .cardSurface(palette.surfaceButter)
             }
             .padding(AppTheme.outerPadding)
         }
-        .background(AppTheme.background)
+        .background(palette.background)
         .task {
             _ = activeSettings
         }

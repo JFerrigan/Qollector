@@ -2,6 +2,8 @@ import UIKit
 import SwiftUI
 
 struct RecordFormView: View {
+    @Environment(\.appThemePalette) private var palette
+    @Environment(\.appFontPreset) private var fontPreset
     let title: String
     let saveButtonTitle: String
     let ratingStyle: RatingStyle
@@ -25,14 +27,14 @@ struct RecordFormView: View {
                 notesSection
 
                 Button(action: onSave) {
-                    Text(saveButtonTitle)
-                        .font(.headline)
+                        Text(saveButtonTitle)
+                        .font(fontPreset.textStyle(.headline, weight: .semibold))
                         .foregroundStyle(Color.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 16)
                         .background(
                             RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .fill(AppTheme.textPrimary)
+                                .fill(palette.textPrimary)
                         )
                 }
                 .buttonStyle(.plain)
@@ -41,7 +43,7 @@ struct RecordFormView: View {
             }
             .padding(AppTheme.outerPadding)
         }
-        .background(AppTheme.background)
+        .background(palette.background)
         .scrollContentBackground(.hidden)
         .onChange(of: draft.title) { _, _ in refreshAutoIconIfNeeded() }
         .onChange(of: draft.artist) { _, _ in refreshAutoIconIfNeeded() }
@@ -57,12 +59,12 @@ struct RecordFormView: View {
                 textField("Tags", text: $draft.tagsText)
             }
         }
-        .cardSurface(AppTheme.surfaceRose)
+        .cardSurface(palette.surfaceRose)
     }
 
     private var ratingSection: some View {
         RatingControl(style: ratingStyle, ratingValue: $draft.ratingValue)
-            .cardSurface(AppTheme.surfaceButter)
+            .cardSurface(palette.surfaceButter)
     }
 
     private var iconSection: some View {
@@ -73,7 +75,7 @@ struct RecordFormView: View {
                     Button("Auto") {
                         draft.iconRecipe = RecordIconRecipeFactory.makeRecipe(title: draft.title, artist: draft.artist)
                     }
-                    .font(.subheadline.weight(.semibold))
+                    .font(fontPreset.textStyle(.subheadline, weight: .semibold))
                 }
             }
 
@@ -108,7 +110,7 @@ struct RecordFormView: View {
                 .pickerStyle(.segmented)
             }
         }
-        .cardSurface(AppTheme.surfaceMint)
+        .cardSurface(palette.surfaceMint)
     }
 
     private var notesSection: some View {
@@ -118,10 +120,10 @@ struct RecordFormView: View {
                 .padding(14)
                 .background(
                     RoundedRectangle(cornerRadius: AppTheme.innerRadius, style: .continuous)
-                        .fill(AppTheme.secondaryBackground)
+                        .fill(palette.secondaryBackground)
                 )
         }
-        .cardSurface(AppTheme.surfaceSky)
+        .cardSurface(palette.surfaceSky)
     }
 
     private func textField(_ title: String, text: Binding<String>, prompt: String? = nil, keyboardType: UIKeyboardType = .default) -> some View {
@@ -131,8 +133,8 @@ struct RecordFormView: View {
                 .textInputAutocapitalization(.words)
                 .padding(14)
                 .background(
-                    RoundedRectangle(cornerRadius: AppTheme.innerRadius, style: .continuous)
-                        .fill(AppTheme.secondaryBackground)
+                        RoundedRectangle(cornerRadius: AppTheme.innerRadius, style: .continuous)
+                        .fill(palette.secondaryBackground)
                 )
         }
     }

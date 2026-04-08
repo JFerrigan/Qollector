@@ -2,6 +2,7 @@ import SwiftData
 import SwiftUI
 
 struct LibraryPageView: View {
+    @Environment(\.appThemePalette) private var palette
     @Query(sort: \RecordItem.updatedAt, order: .reverse) private var records: [RecordItem]
     @Query private var settings: [AppSettings]
     let onSelectRecord: (RecordItem) -> Void
@@ -9,8 +10,6 @@ struct LibraryPageView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: AppTheme.sectionSpacing) {
-                summaryBanner
-
                 if records.isEmpty {
                     emptyState
                 } else {
@@ -28,29 +27,16 @@ struct LibraryPageView: View {
             }
             .padding(AppTheme.outerPadding)
         }
-        .background(AppTheme.background)
+        .background(palette.background)
         .accessibilityIdentifier("page.library")
-    }
-
-    private var summaryBanner: some View {
-        HStack {
-            Text("\(records.count)")
-                .font(.system(size: 34, weight: .bold, design: .rounded))
-                .foregroundStyle(AppTheme.textPrimary)
-            Spacer()
-            Image(systemName: "square.stack.3d.up.fill")
-                .font(.title2)
-                .foregroundStyle(AppTheme.textPrimary)
-        }
-        .cardSurface(AppTheme.surfaceButter)
     }
 
     private var emptyState: some View {
         Image(systemName: "square.stack.3d.up")
             .font(.system(size: 28))
-            .foregroundStyle(AppTheme.textSecondary)
+            .foregroundStyle(palette.textSecondary)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .cardSurface(AppTheme.secondaryBackground)
+        .cardSurface(palette.secondaryBackground)
     }
 
     private var currentRatingStyle: RatingStyle {

@@ -2,6 +2,7 @@ import SwiftData
 import SwiftUI
 
 struct SearchPageView: View {
+    @Environment(\.appThemePalette) private var palette
     @Query(sort: \RecordItem.title) private var records: [RecordItem]
     @Query private var settings: [AppSettings]
     @State private var searchText = ""
@@ -14,19 +15,19 @@ struct SearchPageView: View {
                     .padding(16)
                     .background(
                         RoundedRectangle(cornerRadius: AppTheme.cardRadius, style: .continuous)
-                            .fill(AppTheme.secondaryBackground)
+                            .fill(palette.secondaryBackground)
                     )
                     .overlay(
                         RoundedRectangle(cornerRadius: AppTheme.cardRadius, style: .continuous)
-                            .stroke(AppTheme.line.opacity(0.7), lineWidth: 1)
+                            .stroke(palette.line.opacity(0.7), lineWidth: 1)
                     )
 
                 if filteredRecords.isEmpty {
                     Image(systemName: "magnifyingglass")
                         .font(.system(size: 24))
-                        .foregroundStyle(AppTheme.textSecondary)
+                        .foregroundStyle(palette.textSecondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .cardSurface(AppTheme.secondaryBackground)
+                    .cardSurface(palette.secondaryBackground)
                 } else {
                     LazyVStack(spacing: 14) {
                         ForEach(filteredRecords) { record in
@@ -42,7 +43,7 @@ struct SearchPageView: View {
             }
             .padding(AppTheme.outerPadding)
         }
-        .background(AppTheme.background)
+        .background(palette.background)
         .accessibilityIdentifier("page.search")
     }
 
