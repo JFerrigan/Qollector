@@ -59,7 +59,7 @@ enum AppBootstrap {
             return existing
         }
 
-        let settings = AppSettings()
+        let settings = AppSettings(preferredRatingStyleRawValue: RatingStyle.stars.rawValue)
         modelContext.insert(settings)
         try? modelContext.save()
         return settings
@@ -69,4 +69,3 @@ enum AppBootstrap {
         RecordEditor.createRecord(from: draft, in: modelContext)
     }
 }
-

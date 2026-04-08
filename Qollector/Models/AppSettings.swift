@@ -1,29 +1,23 @@
 import Foundation
 import SwiftData
 
-@Model
-final class AppSettings {
-    var preferredRatingStyleRawValue: String
-    var backgroundPresetRawValue: String
-    var fontPresetRawValue: String
-    var backgroundColorRawValue: String
-    var uiColorRawValue: String
-    var didSeedSampleLibrary: Bool
+typealias AppSettings = QollectorSchemaV3.AppSettings
 
-    init(
+extension QollectorSchemaV3.AppSettings {
+    convenience init(
         preferredRatingStyle: RatingStyle = .stars,
-        backgroundPreset: AppBackgroundPreset = .rose,
         fontPreset: AppFontPreset = .rounded,
         backgroundColor: AppColorPreset = .paper,
         uiColor: AppColorPreset = .rose,
         didSeedSampleLibrary: Bool = false
     ) {
-        self.preferredRatingStyleRawValue = preferredRatingStyle.rawValue
-        self.backgroundPresetRawValue = backgroundPreset.rawValue
-        self.fontPresetRawValue = fontPreset.rawValue
-        self.backgroundColorRawValue = backgroundColor.rawValue
-        self.uiColorRawValue = uiColor.rawValue
-        self.didSeedSampleLibrary = didSeedSampleLibrary
+        self.init(
+            preferredRatingStyleRawValue: preferredRatingStyle.rawValue,
+            fontPresetRawValue: fontPreset.rawValue,
+            backgroundColorRawValue: backgroundColor.rawValue,
+            uiColorRawValue: uiColor.rawValue,
+            didSeedSampleLibrary: didSeedSampleLibrary
+        )
     }
 
     var preferredRatingStyle: RatingStyle {
@@ -31,16 +25,8 @@ final class AppSettings {
         set { preferredRatingStyleRawValue = newValue.rawValue }
     }
 
-    var backgroundPreset: AppBackgroundPreset {
-        get { AppBackgroundPreset(rawValue: backgroundPresetRawValue) ?? .rose }
-        set { backgroundPresetRawValue = newValue.rawValue }
-    }
-
     var backgroundColor: AppColorPreset {
-        get {
-            AppColorPreset(rawValue: backgroundColorRawValue)
-            ?? legacyColor(for: backgroundPreset)
-        }
+        get { AppColorPreset(rawValue: backgroundColorRawValue) ?? .paper }
         set { backgroundColorRawValue = newValue.rawValue }
     }
 
@@ -52,20 +38,5 @@ final class AppSettings {
     var fontPreset: AppFontPreset {
         get { AppFontPreset(rawValue: fontPresetRawValue) ?? .rounded }
         set { fontPresetRawValue = newValue.rawValue }
-    }
-
-    private func legacyColor(for preset: AppBackgroundPreset) -> AppColorPreset {
-        switch preset {
-        case .paper:
-            return .paper
-        case .rose:
-            return .rose
-        case .mint:
-            return .mint
-        case .sky:
-            return .sky
-        case .peach:
-            return .peach
-        }
     }
 }
